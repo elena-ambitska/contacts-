@@ -1,18 +1,19 @@
+import {TableCell, TableHead, Typography} from "@mui/material";
 
 
 export const Header = () => {
-    return(
-        <header>
-            <ul>
-                <li>Avatar</li>
-                <li>Full Name</li>
-                <li>Birthday</li>
-                <li>Email</li>
-                <li>Phone</li>
-                <li>Location</li>
-                <li>Nationality</li>
-            </ul>
-
-        </header>
+    const navItems = ["Avatar", "Full Name", "Birthday", "Email", "Phone","Location","Nationality" ]
+    return (
+        <TableHead>
+            {navItems.map((nav, index) => {
+                return(
+                <TableCell key={index} align="center" >
+                    <Typography variant="h5">
+                        {nav}
+                    </Typography>
+                </TableCell>
+                )
+            })}
+        </TableHead>
     )
 }

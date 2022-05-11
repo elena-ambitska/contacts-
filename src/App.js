@@ -3,7 +3,7 @@ import {Contacts} from "./pages/Contacts";
 import {connect} from "react-redux";
 import {getContacts as getContactsAction, setPagination} from "./redux/modules/contacts";
 import {useEffect} from "react";
-import {Container, Grid, Typography} from "@mui/material";
+import {Container, Grid, Paper, Table, TableBody, TableContainer, Typography} from "@mui/material";
 import {default as FilterFill} from "./components/FilterFill";
 import {Header} from "./components/Header";
 import {PaginationComponent} from "./components/Pagination";
@@ -33,15 +33,20 @@ function App({contacts, getContacts, filter, page, gender, nationality, setPagin
                     Contacts
                 </Typography>
                 <FilterFill/>
-                <Header/>
-                <div>
-                    {contacts.length && contacts.filter(filterContacts).map((item, index) => {
-                        return <Contacts key={index} picture={item.picture} name={item.name} dob={item.dob}
-                                         email={item.email} phone={item.phone} location={item.location} nat={item.nat}/>
-                    })}
-                </div>
+
+                <TableContainer component={Paper}>
+                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <Header/>
+                        <TableBody>
+                            {contacts.length && contacts.filter(filterContacts).map((item, index) => {
+                                return <Contacts key={index} picture={item.picture} name={item.name} dob={item.dob}
+                                                 email={item.email} phone={item.phone} location={item.location}
+                                                 nat={item.nat}/>
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 <PaginationComponent page={page} onChange={(e, value) => {
-                    console.log(value);
                     setPagination(value)
                 }}/>
             </Grid>
